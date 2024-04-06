@@ -1,6 +1,7 @@
 package net.ananaseek.tutorialmod.item;
 
 import net.ananaseek.tutorialmod.TutorialMod;
+import net.ananaseek.tutorialmod.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -20,6 +21,7 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.tutorial_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModItems.SAPPHIRE.get());
+                        output.accept(ModBlocks.SAPPHIRE_BLOCK.get());
                         output.accept(Items.EMERALD);
                         output.accept(Items.DIAMOND);
                     })
