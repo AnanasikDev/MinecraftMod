@@ -2,6 +2,7 @@ package net.ananaseek.tutorialmod.block;
 
 import net.ananaseek.tutorialmod.TutorialMod;
 import net.ananaseek.tutorialmod.item.ModItems;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +22,17 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SAPPHIRE_BLOCK = registerBlock("sapphire_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(SoundType.AMETHYST)));
+    public static final RegistryObject<Block> RAW_SAPPHIRE_BLOCK = registerBlock("raw_sapphire_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).sound(SoundType.DEEPSLATE)));
+    public static final RegistryObject<Block> SAPPHIRE_ORE = registerBlock("sapphire_ore",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(2.3F).requiresCorrectToolForDrops().lightLevel((o)-> 7)));
+    public static final RegistryObject<Block> DEEPSLATE_SAPPHIRE_ORE = registerBlock("deepslate_sapphire_ore",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).strength(2.5F).requiresCorrectToolForDrops().lightLevel((o)-> 5)));
+    public static final RegistryObject<Block> NETHER_SAPPHIRE_ORE = registerBlock("nether_sapphire_ore",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERRACK).strength(1.7F).requiresCorrectToolForDrops().lightLevel((o)-> 5)));
+    public static final RegistryObject<Block> END_STONE_SAPPHIRE_ORE = registerBlock("end_stone_sapphire_ore",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.END_STONE).strength(2.8F).requiresCorrectToolForDrops().lightLevel((o)-> 6)));
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
