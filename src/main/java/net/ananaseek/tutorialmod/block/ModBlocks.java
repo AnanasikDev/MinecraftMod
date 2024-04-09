@@ -1,6 +1,8 @@
 package net.ananaseek.tutorialmod.block;
 
 import net.ananaseek.tutorialmod.TutorialMod;
+import net.ananaseek.tutorialmod.block.custom.BigTNTBlock;
+import net.ananaseek.tutorialmod.block.custom.SoundBlock;
 import net.ananaseek.tutorialmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -23,6 +25,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SAPPHIRE_BLOCK = registerBlock("sapphire_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).sound(SoundType.AMETHYST)));
+
     public static final RegistryObject<Block> RAW_SAPPHIRE_BLOCK = registerBlock("raw_sapphire_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).sound(SoundType.DEEPSLATE)));
 
@@ -42,6 +45,11 @@ public class ModBlocks {
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.END_STONE)
                     .strength(3.2F).requiresCorrectToolForDrops().lightLevel((o)-> 6), UniformInt.of(4, 8)));
 
+    public static final RegistryObject<Block> SOUND_BLOCK = registerBlock("sound_block",
+            () -> new SoundBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> BIG_TNT_BLOCK = registerBlock("big_tnt_block",
+            () -> new BigTNTBlock(BlockBehaviour.Properties.copy(Blocks.TNT).strength(0.1f).ignitedByLava().destroyTime(0)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
