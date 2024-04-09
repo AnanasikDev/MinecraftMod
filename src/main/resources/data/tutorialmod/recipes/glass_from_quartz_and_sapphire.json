@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "sqs",
+    "qsq",
+    "sqs"
+  ],
+  "key": {
+    "s": {
+      "item": "tutorialmod:sapphire"
+    },
+    "q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "result": {
+    "item": "minecraft:glass",
+    "count": 4
+  }
+}
