@@ -1,6 +1,7 @@
 package net.ananaseek.tutorialmod.item;
 
 import net.ananaseek.tutorialmod.TutorialMod;
+import net.ananaseek.tutorialmod.item.custom.FireBallItem;
 import net.ananaseek.tutorialmod.item.custom.MetalDetectorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,6 +19,10 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> METAL_DETECTOR = ITEMS.register("metal_detector",
             () -> new MetalDetectorItem(new Item.Properties().durability(50)));
+    public static final RegistryObject<Item> LEVIO = ITEMS.register("levio",
+            () -> new Item(new Item.Properties().food(ModFoods.LEVIO).stacksTo(32)));
+    public static final RegistryObject<Item> FIRE_BALL = ITEMS.register("fire_ball",
+            () -> new FireBallItem(new Item.Properties()));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
