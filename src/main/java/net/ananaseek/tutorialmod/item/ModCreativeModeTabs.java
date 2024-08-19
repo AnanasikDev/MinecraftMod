@@ -33,6 +33,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.END_STONE_SAPPHIRE_ORE.get());
                         output.accept(ModBlocks.SOUND_BLOCK.get());
                         output.accept(ModBlocks.BIG_TNT_BLOCK.get());
+                        output.accept(ModItems.SILLY_BOW.get());
                     })
                     .build());
 

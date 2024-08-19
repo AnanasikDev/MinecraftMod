@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.ananaseek.tutorialmod.block.ModBlocks;
 import net.ananaseek.tutorialmod.item.ModCreativeModeTabs;
 import net.ananaseek.tutorialmod.item.ModItems;
+import net.ananaseek.tutorialmod.util.ModItemProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -66,6 +67,7 @@ public class TutorialMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            ModItemProperties.addCustomItemProperties();
         }
     }
 }

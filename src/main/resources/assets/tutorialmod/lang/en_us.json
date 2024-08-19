@@ -15,5 +15,7 @@
   "block.tutorialmod.end_stone_sapphire_ore": "End Stone Sapphire Ore",
 
   "block.tutorialmod.sound_block": "Sound Block",
-  "block.tutorialmod.big_tnt_block": "BIG TNT"
+  "block.tutorialmod.big_tnt_block": "BIG TNT",
+
+  "item.tutorialmod.silly_bow": "Silly Bow"
 }

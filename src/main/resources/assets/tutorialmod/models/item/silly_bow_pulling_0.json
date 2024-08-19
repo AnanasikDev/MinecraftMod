@@ -1,0 +1,6 @@
+{
+  "parent": "tutorialmod:item/silly_bow",
+  "textures": {
+    "layer0": "tutorialmod:item/silly_bow_pulling_0"
+  }
+}
