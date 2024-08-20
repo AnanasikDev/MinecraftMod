@@ -1,5 +1,6 @@
 package net.ananaseek.tutorialmod.item.custom;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -12,10 +13,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class FireBall extends ThrowableItemProjectile {
+
+    private int lives = 0;
+    private int maxLives = 3;
+
     public FireBall(EntityType<? extends FireBall> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -67,11 +75,39 @@ public class FireBall extends ThrowableItemProjectile {
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
         if (!this.level().isClientSide) {
-            this.level().broadcastEntityEvent(this, (byte)3);
-            this.discard();
+            if (lives < maxLives){
+                this.level().broadcastEntityEvent(this, (byte)3);
+                Vec3 delta = this.getDeltaMovement();
+                float factor = 0.75f;
 
-            var pos = pResult.getLocation();
-            this.level().explode(this, pos.x, pos.y, pos.z, 2.7F, Level.ExplosionInteraction.TNT);
+                this.shoot(delta.x, -delta.y, delta.z, (float)delta.length() * factor, 0.7f);
+                lives++;
+                var pos = pResult.getLocation();
+                this.level().explode(this, pos.x, pos.y, pos.z, 1.6F, false, Level.ExplosionInteraction.TNT);
+            }
+            else{
+                this.discard();
+
+                var pos = pResult.getLocation();
+                this.level().explode(this, pos.x, pos.y, pos.z, 2.7F, true, Level.ExplosionInteraction.TNT);
+
+                int halfwidth = 4;
+
+                for (int x = -halfwidth; x < halfwidth; x++){
+                    for (int y = -halfwidth; y < halfwidth; y++){
+                        for (int z = -halfwidth; z < halfwidth; z++)
+                        {
+                            BlockPos blockPos = new BlockPos((int)pos.x + x, (int)pos.y + y, (int)pos.z + z);
+
+                            if (level().getBlockState(blockPos).isAir()) continue;
+
+                            BlockState blockState = Math.random() < 0.6 ? Blocks.MAGMA_BLOCK.defaultBlockState() : Blocks.LAVA.defaultBlockState();
+
+                            level().setBlock(blockPos, blockState, 0x0100110);
+                        }
+                    }
+                }
+            }
         }
 
     }

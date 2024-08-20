@@ -49,8 +49,8 @@ public abstract class AbstractSillyArrow extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult pResult){
         super.onHitEntity(pResult);
-        var pos = pResult.getLocation();
-        Hit(pos, 8, true);
+        //var pos = pResult.getLocation();
+        //Hit(pos, 8, true);
     }
 
     @Override
