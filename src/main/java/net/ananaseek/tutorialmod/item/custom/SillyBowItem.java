@@ -47,26 +47,9 @@ public class SillyBowItem extends BowItem implements Vanishable {
                     boolean flag1 = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, pStack, player));
                     if (!pLevel.isClientSide) {
                         ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                        AbstractArrow abstractarrow = arrowitem.createArrow(pLevel, itemstack, player);
+                        AbstractSillyArrow abstractarrow = AbstractSillyArrow.createArrow(pLevel, itemstack, player);
                         abstractarrow = customArrow(abstractarrow);
                         abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 3.0F, 1.0F);
-                        if (f == 1.0F) {
-                            abstractarrow.setCritArrow(true);
-                        }
-
-                        int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, pStack);
-                        if (j > 0) {
-                            abstractarrow.setBaseDamage(abstractarrow.getBaseDamage() + (double)j * 0.5D + 0.5D);
-                        }
-
-                        int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, pStack);
-                        if (k > 0) {
-                            abstractarrow.setKnockback(k);
-                        }
-
-                        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, pStack) > 0) {
-                            abstractarrow.setSecondsOnFire(100);
-                        }
 
                         pStack.hurtAndBreak(1, player, (p_289501_) -> {
                             p_289501_.broadcastBreakEvent(player.getUsedItemHand());
@@ -78,7 +61,7 @@ public class SillyBowItem extends BowItem implements Vanishable {
                         pLevel.addFreshEntity(abstractarrow);
                     }
 
-                    pLevel.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    pLevel.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                     if (!flag1 && !player.getAbilities().instabuild) {
                         itemstack.shrink(1);
                         if (itemstack.isEmpty()) {
@@ -93,6 +76,19 @@ public class SillyBowItem extends BowItem implements Vanishable {
     }
 
     /**
+     * Gets the velocity of the arrow entity from the bow's charge
+     */
+    public static float getPowerForTime(int pCharge) {
+        float f = (float)pCharge / 20.0F;
+        f = (f * f + f * 2.0F) / 3.0F;
+        if (f > 1.0F) {
+            f = 1.0F;
+        }
+
+        return f;
+    }
+
+    /**
      * Get the predicate to match ammunition when searching the player's inventory, not their main/offhand
      */
     @MethodsReturnNonnullByDefault
@@ -101,7 +97,7 @@ public class SillyBowItem extends BowItem implements Vanishable {
     }
 
     @MethodsReturnNonnullByDefault
-    public AbstractArrow customArrow(AbstractArrow arrow) {
+    public AbstractSillyArrow customArrow(AbstractSillyArrow arrow) {
         return arrow;
     }
 
