@@ -108,9 +108,12 @@ public class FireBall extends ThrowableItemProjectile {
 
                             if (level().getBlockState(blockPos).isAir()) continue;
 
-                            BlockState blockState = Math.random() < 0.6 ? Blocks.MAGMA_BLOCK.defaultBlockState() : Blocks.LAVA.defaultBlockState();
+                            BlockState blockState = Math.random() < 0.25 ? Blocks.LAVA.defaultBlockState() : (Math.random() < 0.7 ? Blocks.MAGMA_BLOCK.defaultBlockState() : Blocks.AIR.defaultBlockState());
 
-                            level().setBlockAndUpdate(blockPos, blockState);
+                            if (blockState != Blocks.AIR.defaultBlockState()){
+                                level().setBlockAndUpdate(blockPos, blockState);
+                            }
+
                             this.level().addParticle(ParticleTypes.LAVA, pos.x, pos.y + 1, pos.z, 1, 1,1);
                         }
                     }

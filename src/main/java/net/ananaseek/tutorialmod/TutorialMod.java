@@ -2,6 +2,7 @@ package net.ananaseek.tutorialmod;
 
 import com.mojang.logging.LogUtils;
 import net.ananaseek.tutorialmod.block.ModBlocks;
+import net.ananaseek.tutorialmod.enchantment.ModEnchantments;
 import net.ananaseek.tutorialmod.item.ModCreativeModeTabs;
 import net.ananaseek.tutorialmod.item.ModItems;
 import net.ananaseek.tutorialmod.util.ModItemProperties;
@@ -34,6 +35,7 @@ public class TutorialMod
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModEnchantments.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 

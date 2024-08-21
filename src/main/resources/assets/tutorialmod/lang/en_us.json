@@ -18,5 +18,8 @@
   "block.tutorialmod.big_tnt_block": "BIG TNT",
 
   "item.tutorialmod.silly_bow": "Silly Bow",
-  "item.tutorialmod.silly_arrow": "Silly Arrow"
+  "item.tutorialmod.silly_arrow": "Silly Arrow",
+
+  "enchantment.tutorialmod.path_builder": "Path Builder",
+  "enchantment.tutorialmod.explosive": "Explosive"
 }

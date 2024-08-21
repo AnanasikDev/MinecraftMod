@@ -9,7 +9,8 @@ Sources & tools:
 The mod is set up for Minecraft Java Forge 1.20.1 (works with any launcher)
 
 Done & learnt:
-- new items, edible items
-- new blocks, ores
+- items, edible items
+- blocks, ores
 - recipes
-- tools
+- tools, weapons
+- enchantments
