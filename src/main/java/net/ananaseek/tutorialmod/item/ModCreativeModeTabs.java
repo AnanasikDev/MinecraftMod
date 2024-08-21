@@ -34,6 +34,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.SOUND_BLOCK.get());
                         output.accept(ModBlocks.BIG_TNT_BLOCK.get());
                         output.accept(ModItems.SILLY_BOW.get());
+                        output.accept(ModItems.SILLY_ARROW.get());
                     })
                     .build());
 

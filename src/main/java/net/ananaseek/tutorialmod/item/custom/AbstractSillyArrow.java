@@ -68,7 +68,6 @@ public abstract class AbstractSillyArrow extends AbstractArrow {
         else
         {
             BlockPos bp = new BlockPos((int)pos.x, (int)pos.y, (int)pos.z);
-            //level().setBlock(bp, Blocks.TORCH.defaultBlockState(), 0x0100110);
             level().setBlockAndUpdate(bp, Blocks.TORCH.defaultBlockState());
             this.discard();
         }
@@ -84,8 +83,8 @@ public abstract class AbstractSillyArrow extends AbstractArrow {
     public void tick(){
         super.tick();
         Vec3 pos = this.position();
-        if (this.level().isClientSide){
-            this.level().addParticle(ParticleTypes.BUBBLE, true, pos.x, pos.y, pos.z, 1, 1,1);
+        if (level().isClientSide){
+            level().addParticle(ParticleTypes.BUBBLE, true, pos.x, pos.y, pos.z, 0f, 0f,0f);
 
         }
     }

@@ -1,9 +1,7 @@
 package net.ananaseek.tutorialmod.item;
 
 import net.ananaseek.tutorialmod.TutorialMod;
-import net.ananaseek.tutorialmod.item.custom.FireBallItem;
-import net.ananaseek.tutorialmod.item.custom.MetalDetectorItem;
-import net.ananaseek.tutorialmod.item.custom.SillyBowItem;
+import net.ananaseek.tutorialmod.item.custom.*;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -26,6 +24,8 @@ public class ModItems {
             () -> new FireBallItem(new Item.Properties()));
     public static final RegistryObject<Item> SILLY_BOW = ITEMS.register("silly_bow",
             () -> new SillyBowItem(new Item.Properties().durability(200)));
+    public static final RegistryObject<Item> SILLY_ARROW = ITEMS.register("silly_arrow",
+            () -> new SillyArrowItem(new Item.Properties()));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

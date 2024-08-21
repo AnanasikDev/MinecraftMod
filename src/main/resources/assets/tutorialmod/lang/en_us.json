@@ -17,5 +17,6 @@
   "block.tutorialmod.sound_block": "Sound Block",
   "block.tutorialmod.big_tnt_block": "BIG TNT",
 
-  "item.tutorialmod.silly_bow": "Silly Bow"
+  "item.tutorialmod.silly_bow": "Silly Bow",
+  "item.tutorialmod.silly_arrow": "Silly Arrow"
 }
