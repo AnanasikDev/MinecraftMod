@@ -6,6 +6,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,9 +18,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
 public class SillyBowItem extends BowItem implements Vanishable {
-    public static final int MAX_DRAW_DURATION = 20;
-    public static final int DEFAULT_RANGE = 15;
-
     public SillyBowItem(Properties pProperties) {
         super(pProperties);
     }
@@ -91,10 +89,15 @@ public class SillyBowItem extends BowItem implements Vanishable {
     /**
      * Get the predicate to match ammunition when searching the player's inventory, not their main/offhand
      */
+    @Override
     @MethodsReturnNonnullByDefault
     public Predicate<ItemStack> getAllSupportedProjectiles() {
-        return ARROW_ONLY;
+        return TORCHES_ONLY;
     }
+
+    public static final Predicate<ItemStack> TORCHES_ONLY = (p_43017_) -> {
+        return p_43017_.is(Items.TORCH);
+    };
 
     @MethodsReturnNonnullByDefault
     public AbstractSillyArrow customArrow(AbstractSillyArrow arrow) {
@@ -103,6 +106,6 @@ public class SillyBowItem extends BowItem implements Vanishable {
 
     @MethodsReturnNonnullByDefault
     public int getDefaultProjectileRange() {
-        return 15;
+        return 20;
     }
 }

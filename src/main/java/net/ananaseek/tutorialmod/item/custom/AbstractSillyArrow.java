@@ -10,6 +10,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -21,6 +23,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public abstract class AbstractSillyArrow extends AbstractArrow {
+
+    public int firelvl = 0;
 
     protected AbstractSillyArrow(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -42,6 +46,7 @@ public abstract class AbstractSillyArrow extends AbstractArrow {
 
     public static AbstractSillyArrow createArrow(Level pLevel, ItemStack pStack, LivingEntity pShooter) {
         AbstractSillyArrow arrow = new SillyArrow(pLevel, pShooter);
+        arrow.firelvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAMING_ARROWS, pShooter);
         //arrow.setEffectsFromItem(pStack);
         return arrow;
     }
@@ -57,7 +62,16 @@ public abstract class AbstractSillyArrow extends AbstractArrow {
     protected void onHit(HitResult pResult){
         super.onHit(pResult);
         var pos = pResult.getLocation();
-        Hit(pos, 5.5f, Math.random() < 0.5);
+        if (firelvl == 0){
+            Hit(pos, 5.5f, Math.random() < 0.5);
+        }
+        else
+        {
+            BlockPos bp = new BlockPos((int)pos.x, (int)pos.y, (int)pos.z);
+            //level().setBlock(bp, Blocks.TORCH.defaultBlockState(), 0x0100110);
+            level().setBlockAndUpdate(bp, Blocks.TORCH.defaultBlockState());
+            this.discard();
+        }
     }
 
     private void Hit(Vec3 pos, float radius, boolean fire){
@@ -66,11 +80,13 @@ public abstract class AbstractSillyArrow extends AbstractArrow {
         this.discard();
     }
 
-//    @Override
-//    public void tick(){
-//        super.tick();
-//        Vec3 pos = this.position();
-//        long time = level().getDayTime();
-//        this.setPos(pos.x, pos.y + Math.sin(time) * 12, pos.z);
-//    }
+    @Override
+    public void tick(){
+        super.tick();
+        Vec3 pos = this.position();
+        if (this.level().isClientSide){
+            this.level().addParticle(ParticleTypes.BUBBLE, true, pos.x, pos.y, pos.z, 1, 1,1);
+
+        }
+    }
 }

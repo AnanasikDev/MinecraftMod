@@ -74,22 +74,29 @@ public class FireBall extends ThrowableItemProjectile {
      */
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        if (!this.level().isClientSide) {
-            if (lives < maxLives){
+        var pos = pResult.getLocation();
+        if (lives < maxLives){
+            if (true){ //!this.level().isClientSide
                 this.level().broadcastEntityEvent(this, (byte)3);
                 Vec3 delta = this.getDeltaMovement();
                 float factor = 0.75f;
 
                 this.shoot(delta.x, -delta.y, delta.z, (float)delta.length() * factor, 0.7f);
                 lives++;
-                var pos = pResult.getLocation();
                 this.level().explode(this, pos.x, pos.y, pos.z, 1.6F, false, Level.ExplosionInteraction.TNT);
             }
             else{
+                this.level().addParticle(ParticleTypes.LAVA, pos.x, pos.y, pos.z, 1, 1,1);
+            }
+        }
+        else{
+            if (true) //!this.level().isClientSide
+            {
                 this.discard();
 
-                var pos = pResult.getLocation();
                 this.level().explode(this, pos.x, pos.y, pos.z, 2.7F, true, Level.ExplosionInteraction.TNT);
+
+                // adding lava & magma
 
                 int halfwidth = 4;
 
@@ -103,12 +110,13 @@ public class FireBall extends ThrowableItemProjectile {
 
                             BlockState blockState = Math.random() < 0.6 ? Blocks.MAGMA_BLOCK.defaultBlockState() : Blocks.LAVA.defaultBlockState();
 
-                            level().setBlock(blockPos, blockState, 0x0100110);
+                            level().setBlockAndUpdate(blockPos, blockState);
+                            this.level().addParticle(ParticleTypes.LAVA, pos.x, pos.y + 1, pos.z, 1, 1,1);
                         }
                     }
                 }
             }
-        }
 
+        }
     }
 }
