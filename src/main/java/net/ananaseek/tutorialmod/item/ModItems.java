@@ -26,6 +26,8 @@ public class ModItems {
             () -> new SillyBowItem(new Item.Properties().durability(200)));
     public static final RegistryObject<Item> SILLY_ARROW = ITEMS.register("silly_arrow",
             () -> new SillyArrowItem(new Item.Properties()));
+    public static final RegistryObject<Item> ICE_BALL = ITEMS.register("ice_ball",
+            () -> new IceBallItem(new Item.Properties()));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

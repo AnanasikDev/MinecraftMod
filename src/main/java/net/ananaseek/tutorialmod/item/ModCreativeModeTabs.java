@@ -35,6 +35,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BIG_TNT_BLOCK.get());
                         output.accept(ModItems.SILLY_BOW.get());
                         output.accept(ModItems.SILLY_ARROW.get());
+                        output.accept(ModItems.ICE_BALL.get());
                     })
                     .build());
 
